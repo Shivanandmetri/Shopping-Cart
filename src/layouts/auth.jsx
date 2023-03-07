@@ -1,7 +1,14 @@
-import React from 'react';
-import { Link, Outlet } from 'react-router-dom';
+import React, { useContext } from 'react';
+import { Link, Navigate, Outlet } from 'react-router-dom';
+import { AuthContext } from '../context/authContext';
 
 export default function Auth() {
+  const { user } = useContext(AuthContext);
+
+  if (user) {
+    return <Navigate to="/" replace />;
+  }
+
   return (
     <div className="flex min-h-full items-center justify-center py-12 px-4 sm:px-6 lg:px-8">
       <div className="w-full max-w-md space-y-8">
@@ -16,8 +23,12 @@ export default function Auth() {
           </h2>
           <p className="mt-2 text-center text-sm text-gray-600">
             Or
-            {' '}
-            <Link to="register" className="font-medium text-indigo-600 hover:text-indigo-500">start your 14-day free trial</Link>
+            <Link
+              to="register"
+              className="font-medium text-indigo-600 hover:text-indigo-500"
+            >
+              start your 14-day free trial
+            </Link>
           </p>
         </div>
         <Outlet />

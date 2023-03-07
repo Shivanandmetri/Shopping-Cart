@@ -1,6 +1,22 @@
-import React from 'react';
+import React, { Fragment, useContext } from 'react';
+import { Disclosure, Menu, Transition } from '@headlessui/react';
+import { Bars3Icon, ShoppingBagIcon, XMarkIcon } from '@heroicons/react/24/outline';
+import { CounterContext } from '../../context/countercontext';
+import { AuthContext } from '../../context/authContext';
+
+const navigation = [
+  { name: 'Dashboard', href: '#', current: true },
+  { name: 'Team', href: '#', current: false },
+  { name: 'Projects', href: '#', current: false },
+  { name: 'Calendar', href: '#', current: false },
+];
+
+function classNames(...classes) {
+  return classes.filter(Boolean).join(' ');
+}
 
 function Header() {
+  const { logout } = useContext(AuthContext);
   return (
     <Disclosure as="nav" className="bg-gray-800">
       {({ open }) => (
@@ -52,10 +68,12 @@ function Header() {
               <div className="absolute inset-y-0 right-0 flex items-center pr-2 sm:static sm:inset-auto sm:ml-6 sm:pr-0">
                 <button
                   type="button"
-                  className="rounded-full bg-gray-800 p-1 text-gray-400 hover:text-white focus:outline-none focus:ring-2 focus:ring-white focus:ring-offset-2 focus:ring-offset-gray-800"
+                  className=" flex items-center gap-2 rounded-full bg-gray-800 p-1 text-gray-400 hover:text-white focus:outline-none focus:ring-2 focus:ring-white focus:ring-offset-2 focus:ring-offset-gray-800"
                 >
-                  <span className="sr-only">View notifications</span>
-                  <BellIcon className="h-6 w-6" aria-hidden="true" />
+                  <ShoppingBagIcon className="h-6 w-6" aria-hidden="true" />
+                  <CounterContext.Consumer>
+                    {(data) => <p>{data.counter}</p> }
+                  </CounterContext.Consumer>
                 </button>
 
                 {/* Profile dropdown */}
@@ -83,7 +101,7 @@ function Header() {
                       <Menu.Item>
                         {({ active }) => (
                           <a
-                            href="#"
+                            href="/"
                             className={classNames(active ? 'bg-gray-100' : '', 'block px-4 py-2 text-sm text-gray-700')}
                           >
                             Your Profile
@@ -93,7 +111,7 @@ function Header() {
                       <Menu.Item>
                         {({ active }) => (
                           <a
-                            href="#"
+                            href="/"
                             className={classNames(active ? 'bg-gray-100' : '', 'block px-4 py-2 text-sm text-gray-700')}
                           >
                             Settings
@@ -102,12 +120,13 @@ function Header() {
                       </Menu.Item>
                       <Menu.Item>
                         {({ active }) => (
-                          <a
-                            href="#"
-                            className={classNames(active ? 'bg-gray-100' : '', 'block px-4 py-2 text-sm text-gray-700')}
+                          <button
+                            type="button"
+                            className={classNames(active ? 'bg-gray-100' : '', ' w-full text-left block px-4 py-2 text-sm text-gray-700')}
+                            onClick={logout}
                           >
                             Sign out
-                          </a>
+                          </button>
                         )}
                       </Menu.Item>
                     </Menu.Items>
