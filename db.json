@@ -64,6 +64,18 @@
       "password": "$2a$10$M4g6CaigcwhNnqn71.pVJ.d1AIilYywry3rpuQldXPWNI3tdrz8QS",
       "name": "Shivanand",
       "id": 11
+    },
+    {
+      "email": "shiva@gmail.com",
+      "password": "$2a$10$KYns3Gim6Vo25iWYHYKss.V5JgENDrFU0IXI5oaVyVwMM7G4...kC",
+      "name": "Shiva",
+      "id": 12
+    },
+    {
+      "email": "rakeshkowti123@gmail.com",
+      "password": "$2a$10$HHKuScOZ3yqDiZl5J.ZfU.lCPjnqGhL9wJBKjLi.2eQ7E2vQVxk3S",
+      "name": "Rakesh",
+      "id": 13
     }
   ],
   "products": [
@@ -306,6 +318,23 @@
         "rate": 3.6,
         "count": 145
       }
+    }
+  ],
+  "cart": [
+    {
+      "productId": 1,
+      "quantity": 2,
+      "id": 1
+    },
+    {
+      "productId": 1,
+      "quantity": 1,
+      "id": 2
+    },
+    {
+      "productId": 1,
+      "quantity": 1,
+      "id": 3
     }
   ]
 }

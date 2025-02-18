@@ -3,6 +3,7 @@ import { Disclosure, Menu, Transition } from '@headlessui/react';
 import { Bars3Icon, ShoppingBagIcon, XMarkIcon } from '@heroicons/react/24/outline';
 import { CounterContext } from '../../context/countercontext';
 import { AuthContext } from '../../context/authContext';
+import { CartContext } from '../../context/cartContext';
 
 const navigation = [
   { name: 'Dashboard', href: '#', current: true },
@@ -17,6 +18,7 @@ function classNames(...classes) {
 
 function Header() {
   const { logout } = useContext(AuthContext);
+  const { cart } = useContext(CartContext);
   return (
     <Disclosure as="nav" className="bg-gray-800">
       {({ open }) => (
@@ -71,9 +73,7 @@ function Header() {
                   className=" flex items-center gap-2 rounded-full bg-gray-800 p-1 text-gray-400 hover:text-white focus:outline-none focus:ring-2 focus:ring-white focus:ring-offset-2 focus:ring-offset-gray-800"
                 >
                   <ShoppingBagIcon className="h-6 w-6" aria-hidden="true" />
-                  <CounterContext.Consumer>
-                    {(data) => <p>{data.counter}</p> }
-                  </CounterContext.Consumer>
+                  <span>{cart.reduce((p, c) => p + c.quantity, 0)}</span>
                 </button>
 
                 {/* Profile dropdown */}
